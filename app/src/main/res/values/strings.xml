@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">WyjazdApka</string>
+    <string name="koniec_wyjazdu">Koniec wyjazdu:</string>
+    <string name="start_wyjazdu">Start wyjazdu:</string>
+    <string name="ustaw_koniec_wyjazdu">Ustaw koniec wyjazdu</string>
+    <string name="ustaw_start_wyjazdu">Ustaw start wyjazdu</string>
+    <string name="d_ugo_wyjazdu">Długość wyjazdu:</string>
 </resources>
