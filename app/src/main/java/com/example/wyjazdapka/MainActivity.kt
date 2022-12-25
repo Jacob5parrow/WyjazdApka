@@ -11,10 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 import java.util.*
+import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,48 +25,70 @@ class MainActivity : AppCompatActivity() {
         val kalendarz = findViewById<CalendarView>(R.id.calendarView)
 
         kalendarz.minDate = System.currentTimeMillis()
-        kalendarz.maxDate = LocalDate.now().plusYears(2).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()
+        kalendarz.maxDate =
+            LocalDate.now().plusYears(2).atStartOfDay(ZoneId.systemDefault()).toInstant()
+                .toEpochMilli()
         kalendarz.firstDayOfWeek = Calendar.MONDAY
 
         val start = findViewById<Button>(R.id.start)
         val end = findViewById<Button>(R.id.end)
-        val wybData = arrayListOf(MsToDate(kalendarz.date)[0], MsToDate(kalendarz.date)[1], MsToDate(kalendarz.date)[2])
+        val wybData = arrayListOf(
+            msToDate(kalendarz.date)[0],
+            msToDate(kalendarz.date)[1],
+            msToDate(kalendarz.date)[2]
+        )
 
-        val startWyj = mutableListOf(0, 0, 0)
-        val endWyj = mutableListOf(0, 0, 0)
+        val startWyjAsList = mutableListOf(0, 0, 0)
+        val endWyjAsList = mutableListOf(0, 0, 0)
 
-        kalendarz.setOnDateChangeListener { CalendarView, day, month, year ->
+        kalendarz.setOnDateChangeListener { _, day, month, year ->
             wybData[0] = day
             wybData[1] = month
             wybData[2] = year
         }
 
+
         val textStart = findViewById<TextView>(R.id.textStart)
         val textEnd = findViewById<TextView>(R.id.textEnd)
+        val textDni = findViewById<TextView>(R.id.textDni)
+
 
         start.setOnClickListener {
-            startWyj[0] = wybData[0]
-            startWyj[1] = wybData[1]
-            startWyj[2] = wybData[2]
-            textStart.text = "Start wyjazdu: "+wybData[0].toString()+"/"+wybData[1].toString()+"/"+wybData[2].toString()
+            startWyjAsList[0] = wybData[0]
+            startWyjAsList[1] = wybData[1]
+            startWyjAsList[2] = wybData[2]
+            textStart.text =
+                "Start wyjazdu: " + wybData[0].toString() + "/" + wybData[1].toString() + "/" + wybData[2].toString()
+
+
         }
 
         end.setOnClickListener {
-            endWyj[0] = wybData[0]
-            endWyj[1] = wybData[1]
-            endWyj[2] = wybData[2]
-            textEnd.text = "Koniec wyjazdu: "+wybData[0].toString()+"/"+wybData[1].toString()+"/"+wybData[2].toString()
+            endWyjAsList[0] = wybData[0]
+            endWyjAsList[1] = wybData[1]
+            endWyjAsList[2] = wybData[2]
+            textEnd.text =
+                "Koniec wyjazdu: " + wybData[0].toString() + "/" + wybData[1].toString() + "/" + wybData[2].toString()
+
+            val startWyj = LocalDate.of(startWyjAsList[0], startWyjAsList[1], startWyjAsList[2])
+            val endWyj = LocalDate.of(endWyjAsList[0], endWyjAsList[1], endWyjAsList[2])
+
+            val period = ChronoUnit.DAYS.between(startWyj, endWyj)
+            val days = abs(period)
+
+            textDni.text = "Dni wyjazdu: $days"
+
         }
     }
 }
 
+
+
 @SuppressLint("SimpleDateFormat")
-fun MsToDate(milli : Long) : List<Int>
-{
+fun msToDate(milli: Long): List<Int> {
     val date = Date(milli)
     val form = SimpleDateFormat("yyyy/MM/dd")
     val formDate = form.format(date)
-    val gData = formDate.split("/").map{ it.toInt() }
-    return gData
+    return formDate.split("/").map { it.toInt() }
 }
 
