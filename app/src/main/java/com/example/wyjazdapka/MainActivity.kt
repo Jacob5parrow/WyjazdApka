@@ -88,14 +88,7 @@ class MainActivity : AppCompatActivity() {
                     textEnd.text =
                         "Data końca wyjazdu nie może być przed datą jego startu"
                 }
-
-
             }
-
-
-
-
-
         }
     }
 }
