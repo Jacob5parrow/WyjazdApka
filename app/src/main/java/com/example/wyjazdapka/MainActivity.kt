@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
                 val period = ChronoUnit.DAYS.between(startWyj, endWyj)
                 val days = abs(period)
 
-                textDni.text = "Dni wyjazdu: " + days.toString()
+                textDni.text = "Dni wyjazdu: $days"
 
                 if(startWyjAsList[0] > endWyjAsList[0] || startWyjAsList[2] > endWyjAsList[2] && startWyjAsList[1] <= endWyjAsList[1])
                 {
