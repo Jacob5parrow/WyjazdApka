@@ -64,23 +64,42 @@ class MainActivity : AppCompatActivity() {
         }
 
         end.setOnClickListener {
+
             endWyjAsList[0] = wybData[0]
             endWyjAsList[1] = wybData[1]
             endWyjAsList[2] = wybData[2]
-            textEnd.text =
-                "Koniec wyjazdu: " + wybData[0].toString() + "/" + wybData[1].toString() + "/" + wybData[2].toString()
 
-            val startWyj = LocalDate.of(startWyjAsList[0], startWyjAsList[1], startWyjAsList[2])
-            val endWyj = LocalDate.of(endWyjAsList[0], endWyjAsList[1], endWyjAsList[2])
+            if (startWyjAsList[0] != 0 && endWyjAsList[0] != 0)
+            {
 
-            val period = ChronoUnit.DAYS.between(startWyj, endWyj)
-            val days = abs(period)
+                val startWyj = LocalDate.of(startWyjAsList[0], startWyjAsList[1], startWyjAsList[2])
+                val endWyj = LocalDate.of(endWyjAsList[0], endWyjAsList[1], endWyjAsList[2])
 
-            textDni.text = "Dni wyjazdu: $days"
+                textEnd.text =
+                    "Koniec wyjazdu: " + wybData[0].toString() + "/" + wybData[1].toString() + "/" + wybData[2].toString()
+
+                val period = ChronoUnit.DAYS.between(startWyj, endWyj)
+                val days = abs(period)
+
+                textDni.text = "Dni wyjazdu: " + days.toString()
+
+                if(startWyjAsList[0] > endWyjAsList[0] || startWyjAsList[2] > endWyjAsList[2] && startWyjAsList[1] <= endWyjAsList[1])
+                {
+                    textEnd.text =
+                        "Data końca wyjazdu nie może być przed datą jego startu"
+                }
+
+
+            }
+
+
+
+
 
         }
     }
 }
+
 
 
 
@@ -91,4 +110,6 @@ fun msToDate(milli: Long): List<Int> {
     val formDate = form.format(date)
     return formDate.split("/").map { it.toInt() }
 }
+
+
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#454545"
     tools:context="MainActivity">
 
     <TextView
@@ -12,6 +13,7 @@
         android:layout_height="42dp"
         android:text="@string/d_ugo_wyjazdu"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#2196F3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,6 +24,7 @@
         android:id="@+id/calendarView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#2196F3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -33,6 +36,8 @@
         android:id="@+id/start"
         android:layout_width="160dp"
         android:layout_height="95dp"
+        android:backgroundTint="#2196F3"
+        android:fontFamily="sans-serif-light"
         android:text="@string/ustaw_start_wyjazdu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,6 +50,8 @@
         android:id="@+id/end"
         android:layout_width="160dp"
         android:layout_height="95dp"
+        android:backgroundTint="#2196F3"
+        android:fontFamily="sans-serif-light"
         android:text="@string/ustaw_koniec_wyjazdu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +68,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.126"
+        android:textColor="#2196F3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.781" />
@@ -71,6 +79,7 @@
         android:layout_height="41dp"
         android:text="@string/koniec_wyjazdu"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#2196F3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.126"
         app:layout_constraintStart_toStartOf="parent"
